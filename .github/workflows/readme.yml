@@ -19,3 +19,7 @@ jobs:
         uses: dephraiim/translate-readme@main
         with:
           LANG: zh-TW
+      - name: Adding README - English
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: en
