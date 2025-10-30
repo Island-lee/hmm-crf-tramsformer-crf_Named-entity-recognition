@@ -1,0 +1,222 @@
+{
+  "name": "AppSliDetector",
+  "enable": false,
+  "job_type": "anomaly_detection",
+  "keywords": [
+    "app"
+  ],
+  "root_cause_num": 20,
+  "detector": "vae",
+  "template": "app",
+  "kpis": [
+    {
+      "metric": "gala_gopher_sli_rtt_nsec",
+      "entity_name": "sli",
+      "enable": true,
+      "atrend": "rise",
+      "params": {
+        "method": "max",
+        "look_back": 10,
+        "obs_size": 25,
+        "outlier_ratio_th": 0.5,
+        "smooth_params": {
+          "method": "conv_smooth",
+          "box_pts": 3
+        }
+      }
+    },
+    {
+      "metric": "gala_gopher_sli_tps",
+      "entity_name": "sli",
+      "enable": true,
+      "atrend": "fall",
+      "params": {
+        "method": "min",
+        "look_back": 10,
+        "obs_size": 25,
+        "outlier_ratio_th": 0.3,
+        "smooth_params": {
+          "method": "conv_smooth",
+          "box_pts": 3
+        }
+      }
+    }
+  ],
+  "model_config": {
+    "name": "vae_model",
+    "params": {
+      "th": 0.5,
+      "max_error_rate": 0.7,
+      "min_retrain_hours": 24,
+      "min_predict_minutes": 20,
+      "norm": {},
+      "vae": {
+        "hidden_sizes": [
+          25,
+          10,
+          5
+        ],
+        "latent_size": 5,
+        "dropout_rate": 0.25,
+        "batch_size": 1024,
+        "num_epochs": 30,
+        "learning_rate": 0.001,
+        "k": 120,
+        "step_size": 30,
+        "num_eval_samples": 10
+      },
+      "threshold": {},
+      "dy_threshold": {
+        "min_percent": -1
+      },
+      "calibrate": {},
+      "error_calibrate": {
+        "fixed_threshold": false,
+        "n": 3,
+        "quantile": 0.99,
+        "alpha": 0.002
+      }
+    }
+  },
+  "features": [
+    {
+      "metric": "gala_gopher_block_count_latency_req"
+    },
+    {
+      "metric": "gala_gopher_block_latency_req_jitter",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_block_latency_req_last",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_block_latency_req_max",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_block_latency_req_sum",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_cpu_iowait_msec"
+    },
+    {
+      "metric": "gala_gopher_cpu_user_msec",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_cpu_total_used_per",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_cpu_backlog_drops"
+    },
+    {
+      "metric": "gala_gopher_cpu_rps_count"
+    },
+    {
+      "metric": "gala_gopher_disk_r_await",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_disk_rareq"
+    },
+    {
+      "metric": "gala_gopher_disk_rspeed",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_disk_rspeed_kB",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_disk_util",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_disk_w_await",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_disk_wareq"
+    },
+    {
+      "metric": "gala_gopher_disk_wspeed",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_disk_wspeed_kB",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_proc_read_bytes",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_proc_write_bytes",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_net_tcp_retrans_segs"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_lost_out"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_srtt",
+      "atrend": "rise"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_notack_bytes"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_notsent_bytes"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_retran_packets"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_sacked_out"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_snd_cwnd"
+    },
+    {
+      "metric": "gala_gopher_tcp_link_sk_drops"
+    },
+    {
+      "metric": "gala_gopher_proc_ns_ext4_write"
+    },
+    {
+      "metric": "gala_gopher_proc_ns_ext4_read"
+    },
+    {
+      "metric": "gala_gopher_proc_ns_ext4_open"
+    },
+    {
+      "metric": "gala_gopher_proc_ns_ext4_flush"
+    },
+    {
+      "metric": "gala_gopher_proc_ns_overlay_write"
+    },
+    {
+      "metric": "gala_gopher_proc_ns_overlay_flush"
+    },
+    {
+      "metric": "gala_gopher_nic_tx_dropped"
+    },
+    {
+      "metric": "gala_gopher_nic_tc_sent_drop"
+    },
+    {
+      "metric": "gala_gopher_nic_rx_dropped"
+    },
+    {
+      "metric": "gala_gopher_proc_stime_jiffies"
+    },
+    {
+      "metric": "gala_gopher_proc_utime_jiffies"
+    }
+  ]
+}

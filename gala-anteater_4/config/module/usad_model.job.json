@@ -1,0 +1,81 @@
+{
+  "name": "AppSliDetector",
+  "enable": true,
+  "job_type": "anomaly_detection",
+  "keywords": [
+    "app"
+  ],
+  "root_cause_num": 20,
+  "detector": "usad",
+  "template": "net",
+  "kpis": [
+    {
+      "metric": "network_tcp_attemptfails",
+      "entity_name": "sli",
+      "atrend": "rise",
+      "enable": true
+    },
+    {
+      "metric": "network_tcp_embryonicrsts",
+      "entity_name": "sli",
+      "atrend": "fall",
+      "enable": true
+    }
+  ],
+  "model_config": {
+    "name": "usad_model",
+    "params": {
+      "detect_type": "pcp",
+      "th": 0.5,
+      "max_error_rate": 0.7,
+      "min_train_hours": 1,
+      "min_predict_minutes": 5,
+      "top_n": 20,
+      "preprocessor": {
+        "smooth_type": "rolling",
+        "smooth_window": 12,
+        "scale_type": "clip",
+        "clip_alpha": 20
+      },
+      "postprocessor": {
+        "score_type": "common",
+        "alpha": 0.01,
+        "q": 0.001,
+        "level": 0.9
+      },
+      "usad": {
+        "smooth_window": 12,
+        "train_data_filter": false,
+        "z_dims": 50,
+        "encoder_nn_size": null,
+        "deocder_nn_size": null,
+        "alpha": 0.1,
+        "get_score_on_dim": false,
+        "do_noise": false,
+        "preprocess_type": "clip",
+        "clip_alpha": 20,
+        "score_type": "common",
+        "q": 1e-3,
+        "level": 0.98,
+        "hidden_sizes": [
+        ],
+        "latent_size": 64,
+        "dropout_rate": 0.1,
+        "num_epochs": 30,
+        "batch_size": 64,
+        "warmup_epoch": 5,
+        "lr": 0.001,
+        "window_size": 32,
+        "patience": 5
+      }
+    }
+  },
+  "features": [
+  {
+    "metric": "mem_util_active"
+  },
+  {
+    "metric": "mem_util_bounce"
+  }
+]
+}

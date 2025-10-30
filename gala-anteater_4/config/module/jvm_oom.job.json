@@ -1,0 +1,88 @@
+{
+  "name": "JVMOutOfMemoryDetector",
+  "enable": false,
+  "job_type": "anomaly_detection",
+  "keywords": [
+    "jvm"
+  ],
+  "detector": "jvm",
+  "template": "jvm",
+  "kpis": [
+    {
+      "metric": "gala_gopher_jvm_info",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_gc_coll_secs_count",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2,
+        "threshold": 15
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_mem_bytes_used",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2,
+        "threshold": 0.5
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_mem_bytes_max",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_mem_pool_bytes_used",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2,
+        "threshold": 0.65
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_mem_pool_bytes_max",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_class_current_loaded",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2,
+        "threshold": 100000
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_threads_current",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2,
+        "threshold": 10000
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_buffer_pool_capacity_bytes",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2
+      }
+    },
+    {
+      "metric": "gala_gopher_jvm_buffer_pool_used_bytes",
+      "entity_name": "jvm",
+      "params": {
+        "look_back": 2,
+        "threshold": "1024MB"
+      }
+    }
+  ]
+}

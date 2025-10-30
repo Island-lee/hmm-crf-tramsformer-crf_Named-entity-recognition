@@ -1,0 +1,48 @@
+{
+  "name": "NICLossDetector",
+  "enable": false,
+  "job_type": "anomaly_detection",
+  "keywords": [
+    "net"
+  ],
+  "root_cause_num": 3,
+  "detector": "th-base",
+  "template": "sys",
+  "kpis": [
+    {
+      "metric": "gala_gopher_nic_tc_sent_drop",
+      "entity_name": "nic",
+      "enable": true,
+      "params": {
+        "look_back": 2,
+        "th": 1
+      }
+    }
+  ],
+  "features": [
+    {
+      "metric": "gala_gopher_nic_tx_dropped",
+      "priority": 0
+    },
+    {
+      "metric": "gala_gopher_nic_rx_dropped",
+      "priority": 0
+    },
+    {
+      "metric": "gala_gopher_tcp_link_sk_drops",
+      "priority": 3
+    },
+    {
+      "metric": "gala_gopher_tcp_link_retran_packets",
+      "priority": 1
+    },
+    {
+      "metric": "gala_gopher_tcp_link_lost_out",
+      "priority": 3
+    },
+    {
+      "metric": "gala_gopher_tcp_link_notsent_bytes",
+      "priority": 4
+    }
+  ]
+}

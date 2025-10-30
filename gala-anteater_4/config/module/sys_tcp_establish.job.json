@@ -1,0 +1,29 @@
+{
+  "name": "SysTcpEstablishDetector",
+  "enable": false,
+  "job_type": "anomaly_detection",
+  "keywords": [
+    "tcp"
+  ],
+  "root_cause_num": 3,
+  "detector": "n-sigma-tcp-establish",
+  "template": "sys",
+  "kpis": [
+    {
+      "metric": "gala_gopher_tcp_link_syn_srtt",
+      "entity_name": "tcp_link",
+      "enable": true,
+      "params": {
+        "look_back": 30,
+        "outlier_ratio_th": 0.5,
+        "obs_size": 3,
+        "min_rtt": 100000
+      }
+    }
+  ],
+  "features": [
+    {
+      "metric": "gala_gopher_endpoint_tcp_retran_synacks"
+    }
+  ]
+}
